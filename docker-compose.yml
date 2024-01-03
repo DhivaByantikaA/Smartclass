@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  app:
+    image: envisions/tuyalocal:dev
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      # api 
+      - "8000:8000"
+      # tuya scan
+      - "6666:6666"
+      - "6667:8000"
+      - "7000:7000"

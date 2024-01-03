@@ -1,0 +1,446 @@
+{
+    "result": [
+        {
+            "active_time": 1689072019,
+            "biz_type": 0,
+            "category": "infrared_ac",
+            "create_time": 1635940954,
+            "icon": "smart/icon/1538039048p03rjhzm8as_0.png",
+            "id": "eb3ee2d283fe2634efjmft",
+            "ip": "",
+            "lat": "",
+            "local_key": "_W].;DguaA|E4J)O",
+            "lon": "",
+            "model": "",
+            "name": "Air Conditioning",
+            "node_id": "8a915ff087692009",
+            "online": true,
+            "owner_id": "161428627",
+            "product_id": "jllh2kdbGM0QTdf1",
+            "product_name": "Air Conditioning",
+            "status": [],
+            "sub": true,
+            "time_zone": "+07:00",
+            "uid": "az1689061590175zllpz",
+            "update_time": 1689134612,
+            "uuid": "eb3ee2d283fe2634efjmft",
+            "mapping": {
+                "wind": {
+                    "code": "wind",
+                    "type": "ENUM",
+                    "values": {
+                        "min": 0,
+                        "max": 3,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "Integer"
+                    }
+                },
+                "mode": {
+                    "code": "mode",
+                    "type": "ENUM",
+                    "values": {
+                        "min": 0,
+                        "max": 4,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "Integer"
+                    }
+                },
+                "power": {
+                    "code": "power",
+                    "type": "BOOLEAN",
+                    "values": {}
+                },
+                "temp": {
+                    "code": "temp",
+                    "type": "ENUM",
+                    "values": {
+                        "min": 16,
+                        "max": 30,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "Integer"
+                    }
+                },
+                "F": {
+                    "code": "F",
+                    "type": "ENUM",
+                    "values": {
+                        "min": 0,
+                        "max": 3,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "Integer"
+                    }
+                },
+                "M": {
+                    "code": "M",
+                    "type": "ENUM",
+                    "values": {
+                        "min": 0,
+                        "max": 4,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "Integer"
+                    }
+                },
+                "PowerOff": {
+                    "code": "PowerOff",
+                    "type": "STRING",
+                    "values": "PowerOff"
+                },
+                "PowerOn": {
+                    "code": "PowerOn",
+                    "type": "STRING",
+                    "values": "PowerOn"
+                },
+                "T": {
+                    "code": "T",
+                    "type": "ENUM",
+                    "values": {
+                        "min": 16,
+                        "max": 30,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "Integer"
+                    }
+                }
+            }
+        },
+        {
+            "active_time": 1689072019,
+            "biz_type": 0,
+            "category": "infrared_tv",
+            "create_time": 1688377010,
+            "icon": "smart/icon/1538041570h4qms2354ni_0.png",
+            "id": "eb3ad9f1a5bb7a4aa4bah9",
+            "ip": "",
+            "lat": "",
+            "local_key": "_W].;DguaA|E4J)O",
+            "lon": "",
+            "model": "",
+            "name": "TV ruang meeting",
+            "node_id": "7c5086ad8425ba7d",
+            "online": true,
+            "owner_id": "161428627",
+            "product_id": "ZAx1jolkKaiu8JtM",
+            "product_name": "TV",
+            "status": [],
+            "sub": true,
+            "time_zone": "+07:00",
+            "uid": "az1689061590175zllpz",
+            "update_time": 1689134612,
+            "uuid": "eb3ad9f1a5bb7a4aa4bah9",
+            "mapping": {
+                "-/--": {
+                    "code": "-/--",
+                    "type": "STRING",
+                    "values": "-/--"
+                },
+                "0": {
+                    "code": "0",
+                    "type": "STRING",
+                    "values": "0"
+                },
+                "1": {
+                    "code": "1",
+                    "type": "STRING",
+                    "values": "1"
+                },
+                "2": {
+                    "code": "2",
+                    "type": "STRING",
+                    "values": "2"
+                },
+                "3": {
+                    "code": "3",
+                    "type": "STRING",
+                    "values": "3"
+                },
+                "4": {
+                    "code": "4",
+                    "type": "STRING",
+                    "values": "4"
+                },
+                "5": {
+                    "code": "5",
+                    "type": "STRING",
+                    "values": "5"
+                },
+                "6": {
+                    "code": "6",
+                    "type": "STRING",
+                    "values": "6"
+                },
+                "7": {
+                    "code": "7",
+                    "type": "STRING",
+                    "values": "7"
+                },
+                "8": {
+                    "code": "8",
+                    "type": "STRING",
+                    "values": "8"
+                },
+                "9": {
+                    "code": "9",
+                    "type": "STRING",
+                    "values": "9"
+                },
+                "Back": {
+                    "code": "Back",
+                    "type": "STRING",
+                    "values": "Back"
+                },
+                "C": {
+                    "code": "C",
+                    "type": "ENUM",
+                    "values": {
+                        "min": 1,
+                        "max": 999,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "Integer"
+                    }
+                },
+                "Channel+": {
+                    "code": "Channel+",
+                    "type": "STRING",
+                    "values": "Channel+"
+                },
+                "Channel-": {
+                    "code": "Channel-",
+                    "type": "STRING",
+                    "values": "Channel-"
+                },
+                "Down": {
+                    "code": "Down",
+                    "type": "STRING",
+                    "values": "Down"
+                },
+                "Home": {
+                    "code": "Home",
+                    "type": "STRING",
+                    "values": "Home"
+                },
+                "Left": {
+                    "code": "Left",
+                    "type": "STRING",
+                    "values": "Left"
+                },
+                "Menu": {
+                    "code": "Menu",
+                    "type": "STRING",
+                    "values": "Menu"
+                },
+                "OK": {
+                    "code": "OK",
+                    "type": "STRING",
+                    "values": "OK"
+                },
+                "Power": {
+                    "code": "Power",
+                    "type": "STRING",
+                    "values": "Power"
+                },
+                "Right": {
+                    "code": "Right",
+                    "type": "STRING",
+                    "values": "Right"
+                },
+                "Up": {
+                    "code": "Up",
+                    "type": "STRING",
+                    "values": "Up"
+                },
+                "Volume+": {
+                    "code": "Volume+",
+                    "type": "STRING",
+                    "values": "Volume+"
+                },
+                "Volume-": {
+                    "code": "Volume-",
+                    "type": "STRING",
+                    "values": "Volume-"
+                }
+            }
+        },
+        {
+            "active_time": 1689072018,
+            "biz_type": 0,
+            "category": "qt",
+            "create_time": 1635936620,
+            "icon": "smart/icon/ay1525749833414yotNt/f0d080dfc793d4dcf423d953ccb7d1aa.png",
+            "id": "83867600f4cfa2c5455d",
+            "ip": "118.96.201.69",
+            "lat": "-6.8900",
+            "local_key": "_W].;DguaA|E4J)O",
+            "lon": "107.6400",
+            "model": "S06-OC-TYWE3S\u9ed1\u8272\u754c\u9762",
+            "name": "Smart IR",
+            "online": true,
+            "owner_id": "161428627",
+            "product_id": "JvihcnJiXk1grl60",
+            "product_name": "Smart IR",
+            "status": [],
+            "sub": false,
+            "time_zone": "+07:00",
+            "uid": "az1689061590175zllpz",
+            "update_time": 1689134611,
+            "uuid": "83867600f4cfa2c5455d",
+            "mapping": {}
+        },
+        {
+            "active_time": 1689071867,
+            "biz_type": 0,
+            "category": "kg",
+            "create_time": 1680752404,
+            "icon": "smart/icon/ay1513750936372C7NJe/9ccdf668a2d0eb1805586a68db166766.png",
+            "id": "eb21a45ab22c089709sf2t",
+            "ip": "118.96.201.69",
+            "lat": "-6.8900",
+            "local_key": "D&8bUeO!j}|Pi{lT",
+            "lon": "107.6400",
+            "model": "",
+            "name": "3Gang Switch ",
+            "online": true,
+            "owner_id": "161428627",
+            "product_id": "vicmvnkugcg41k5n",
+            "product_name": "3Gang Switch ",
+            "status": [
+                {
+                    "code": "switch_1",
+                    "value": false
+                },
+                {
+                    "code": "switch_2",
+                    "value": false
+                },
+                {
+                    "code": "switch_3",
+                    "value": false
+                },
+                {
+                    "code": "countdown_1",
+                    "value": 0
+                },
+                {
+                    "code": "countdown_2",
+                    "value": 0
+                },
+                {
+                    "code": "countdown_3",
+                    "value": 0
+                },
+                {
+                    "code": "relay_status",
+                    "value": "last"
+                },
+                {
+                    "code": "switch_backlight",
+                    "value": true
+                },
+                {
+                    "code": "cycle_time",
+                    "value": ""
+                },
+                {
+                    "code": "switch_inching",
+                    "value": "AAAF"
+                }
+            ],
+            "sub": false,
+            "time_zone": "+07:00",
+            "uid": "az1689061590175zllpz",
+            "update_time": 1689071870,
+            "uuid": "08ad493810815a59",
+            "mapping": {
+                "1": {
+                    "code": "switch_1",
+                    "type": "Boolean",
+                    "values": {}
+                },
+                "2": {
+                    "code": "switch_2",
+                    "type": "Boolean",
+                    "values": {}
+                },
+                "3": {
+                    "code": "switch_3",
+                    "type": "Boolean",
+                    "values": {}
+                },
+                "7": {
+                    "code": "countdown_1",
+                    "type": "Integer",
+                    "values": {
+                        "unit": "s",
+                        "min": 0,
+                        "max": 86400,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "8": {
+                    "code": "countdown_2",
+                    "type": "Integer",
+                    "values": {
+                        "unit": "s",
+                        "min": 0,
+                        "max": 86400,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "9": {
+                    "code": "countdown_3",
+                    "type": "Integer",
+                    "values": {
+                        "unit": "s",
+                        "min": 0,
+                        "max": 86400,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "14": {
+                    "code": "relay_status",
+                    "type": "Enum",
+                    "values": {
+                        "range": [
+                            "power_off",
+                            "power_on",
+                            "last"
+                        ]
+                    }
+                },
+                "16": {
+                    "code": "switch_backlight",
+                    "type": "Boolean",
+                    "values": {}
+                },
+                "17": {
+                    "code": "cycle_time",
+                    "type": "String",
+                    "values": "{}"
+                },
+                "19": {
+                    "code": "switch_inching",
+                    "type": "String",
+                    "values": "{}"
+                }
+            }
+        }
+    ],
+    "success": true,
+    "t": 1689159898024,
+    "tid": "f0584e7020a311ee9fecaa50f188a4b0",
+    "file": {
+        "name": "tuya-raw.json",
+        "description": "Full raw list of Tuya devices.",
+        "account": "yvddf33p8ag77dfyq3pv",
+        "date": "2023-07-12T18:05:04.900299",
+        "tinytuya": "1.12.9"
+    }
+}

@@ -1,0 +1,1163 @@
+[
+    {
+        "id": "552ed1ed09f56426",
+        "type": "tab",
+        "label": "Telkom - SmartClass",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7371f30989a437f1",
+        "type": "tab",
+        "label": "Get Status",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "05ab146697317e78",
+        "type": "tab",
+        "label": "cron",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5547b35163de4760",
+        "type": "mqtt-broker",
+        "name": "envisions",
+        "broker": "broker.envisionsapp.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ad2a8b806551e484",
+        "type": "inject",
+        "z": "552ed1ed09f56426",
+        "name": "init",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [
+                "52802f283d69cbc0",
+                "a2a11e4d2abc96e2"
+            ]
+        ]
+    },
+    {
+        "id": "52802f283d69cbc0",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "name": "config",
+        "func": "const api = \"http://localhost:8000\"\nconst company_id = \"MPS\"\n\n// const rtsp_url = '0' //webcam\n// const rtsp_url = 'rtsp://admin:pahlawan10@192.168.2.243:554/Streaming/channels/101' //webcam\n// const rtsp_url = 'rtsp://admin:pahlawan10@192.168.3.11:554/Streaming/Channels/101' //imo\n// const rtsp_url = 'rtsp://admin:PZSYCL@192.168.3.242:554/Streaming/Channels/101' //ezviz\n\nglobal.set(\"api\", api)\nglobal.set(\"company_id\", company_id)\n\nnode.status({fill:\"green\",shape:\"ring\",text:\"initiated\"});\n\nreturn msg;\n",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "6452b64f1698a979",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "d": true,
+        "name": "class - devices",
+        "func": "const assets = {\n    \"class_1\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"eb45f1af860a780d3epinn\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"eb45f1af860a780d3epinn\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"eb45f1af860a780d3epinn\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"ebcbc72bb371d09d2cdmy0\",\n            \"dps_id\": 1\n        }]\n    },\n    \"class_2\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"ebd0abef57e01640fawkqo\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"ebd0abef57e01640fawkqo\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"ebd0abef57e01640fawkqo\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"eb824cadc1411b87db2car\",\n            \"dps_id\": 1\n        }]\n    },\n    \"class_3\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"ebe6a1998afcfd9e40a2fk\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"ebe6a1998afcfd9e40a2fk\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"ebe6a1998afcfd9e40a2fk\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"eb8d5f0ca53a76c499qi52\",\n            \"dps_id\": 1\n        }]\n    },\n    \"class_4\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"ebe6a1998afcfd9e40a2fk\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"ebe6a1998afcfd9e40a2fk\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"ebe6a1998afcfd9e40a2fk\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"eb32b70c1c3eb77de3jsxh\",\n            \"dps_id\": 1\n        }]\n    },\n    \"class_5\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"eb1f1b84736d57aeec54ji\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"eb1f1b84736d57aeec54ji\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"eb1f1b84736d57aeec54ji\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"eb246ae48981b4e79ebwzf\",\n            \"dps_id\": 1\n        }]\n    },\n    \"class_6\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"ebf1e0b1269fc88d5flpag\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"ebf1e0b1269fc88d5flpag\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"ebf1e0b1269fc88d5flpag\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"eb42afd7bcedb62449aurc\",\n            \"dps_id\": 1\n        }]\n    },\n    \"class_7\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"eb764a1adf2beb4ea6oucj\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"eb764a1adf2beb4ea6oucj\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"eb764a1adf2beb4ea6oucj\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"eb2e2d808ac004968ff6mh\",\n            \"dps_id\": 1\n        }]\n    },\n    \"class_8\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"eb084156795228b459gae1\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"eb084156795228b459gae1\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"eb084156795228b459gae1\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"eb0f5542b398d03fb2e45a\",\n            \"dps_id\": 1\n        }]\n    },\n    \"class_9\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"eb76d912b190c5f8b2y0qf\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"eb76d912b190c5f8b2y0qf\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"eb76d912b190c5f8b2y0qf\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"eb0179b2095ab63bea9nfj\",\n            \"dps_id\": 1\n        }]\n    },\n    \"class_10\": {\n        \"cctv\": \"\",\n        \"devices\": [{\n            \"name\": \"saklar_1\",\n            \"device_id\": \"eb45f1af860a780d3epinn\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"saklar_2\",\n            \"device_id\": \"eb45f1af860a780d3epinn\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"saklar_3\",\n            \"device_id\": \"eb45f1af860a780d3epinn\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"eb3759d59f49adafdcmsbv\",\n            \"dps_id\": 1\n        }]\n    },\n}\n\nflow.set('assets', assets)\n\nreturn msg;\n\n\n\n\n",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "c9ac79e9021c646c",
+        "type": "inject",
+        "z": "552ed1ed09f56426",
+        "name": "Interval",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "20",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "3231648c034ec7a6"
+            ]
+        ]
+    },
+    {
+        "id": "3231648c034ec7a6",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "name": "get class",
+        "func": "const assets = global.get(\"assets\");\n\nfor (const [key, value] of Object.entries(assets)) {\n\n    const new_msg = {\n        asset_id: key,\n        asset_value: value,\n        payload: value\n    }\n\n    node.send(new_msg);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "74d797b0640857b9",
+                "6ee20e308edf8064"
+            ]
+        ]
+    },
+    {
+        "id": "74d797b0640857b9",
+        "type": "debug",
+        "z": "552ed1ed09f56426",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6ee20e308edf8064",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "name": "Capture CCTV Req",
+        "func": "const api = global.get(\"api\")\nconst rtsp_url = msg.asset_value.cctv\n\nmsg.method = \"POST\"\nmsg.url = `${api}/capture-image?rtsp_url=${rtsp_url}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 340,
+        "wires": [
+            [
+                "151b2cdcab72dd87"
+            ]
+        ]
+    },
+    {
+        "id": "151b2cdcab72dd87",
+        "type": "http request",
+        "z": "552ed1ed09f56426",
+        "name": "Req",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 630,
+        "y": 340,
+        "wires": [
+            [
+                "a6c2547162e72de7"
+            ]
+        ]
+    },
+    {
+        "id": "ce8dafd3af85841b",
+        "type": "debug",
+        "z": "552ed1ed09f56426",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a6c2547162e72de7",
+        "type": "json",
+        "z": "552ed1ed09f56426",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 770,
+        "y": 340,
+        "wires": [
+            [
+                "ce8dafd3af85841b",
+                "7a3392b19a4c10f3"
+            ]
+        ]
+    },
+    {
+        "id": "7a3392b19a4c10f3",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "name": "cek",
+        "func": "\n\nif(msg.payload.status == 'ok') {\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 340,
+        "wires": [
+            [
+                "0a6c5a7109825a6f"
+            ]
+        ]
+    },
+    {
+        "id": "b5b18853b74a5885",
+        "type": "http request",
+        "z": "552ed1ed09f56426",
+        "name": "Req",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 630,
+        "y": 400,
+        "wires": [
+            [
+                "079a417de4052331"
+            ]
+        ]
+    },
+    {
+        "id": "0a6c5a7109825a6f",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "name": "Object Detection Req",
+        "func": "const api = global.get(\"api\")\n\nconst img = msg.payload.data\n\nmsg.method = \"POST\"\nmsg.url = `${api}/object-detection?image_path=${img}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 400,
+        "wires": [
+            [
+                "b5b18853b74a5885"
+            ]
+        ]
+    },
+    {
+        "id": "079a417de4052331",
+        "type": "json",
+        "z": "552ed1ed09f56426",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 770,
+        "y": 400,
+        "wires": [
+            [
+                "ac81389cce830e1e"
+            ]
+        ]
+    },
+    {
+        "id": "bdc3df84a104ae5d",
+        "type": "comment",
+        "z": "552ed1ed09f56426",
+        "name": "multiple class",
+        "info": "",
+        "x": 170,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ac81389cce830e1e",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "name": "check people",
+        "func": "const p = msg.payload\nconst person = p.data.person\n\n//jika tidak orang lanjutkan proses\nif(person <= 0) {\n    node.status({ fill: \"red\", shape: \"ring\", text: `${person } orang` });\n\n} else {\n    node.status({ fill: \"green\", shape: \"ring\", text: `${person} orang` });\n}\n\nmsg.payload = person\n\nreturn msg\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 400,
+        "wires": [
+            [
+                "a983754b7948eb5d",
+                "eea3a1883e161f72"
+            ]
+        ]
+    },
+    {
+        "id": "458219346c709a4d",
+        "type": "http request",
+        "z": "552ed1ed09f56426",
+        "name": "Req",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 870,
+        "y": 520,
+        "wires": [
+            [
+                "70bbe7606f03b402"
+            ]
+        ]
+    },
+    {
+        "id": "70bbe7606f03b402",
+        "type": "debug",
+        "z": "552ed1ed09f56426",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "d5144d6f87edaecb",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "name": "off request",
+        "func": "const api = global.get(\"api\")\n\nconst devices = msg.asset_value.devices\n\nfor (const device of devices) {\n    const tuya_device_id = device.device_id // device id ambil dari data scan api\n    const dps_id = device.dps_id // dps_id biasanya urutan saklar\n    const value = false //false adalah off\n\n    const new_msg = {\n        method: \"POST\",\n        url: `${api}/control?tuya_device_id=${tuya_device_id}&dps_id=${dps_id}&value=${value}`\n    }\n\n    node.send(new_msg)\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 520,
+        "wires": [
+            [
+                "458219346c709a4d"
+            ]
+        ]
+    },
+    {
+        "id": "a983754b7948eb5d",
+        "type": "switch",
+        "z": "552ed1ed09f56426",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 480,
+        "wires": [
+            [
+                "fd3170aa0af8602f"
+            ],
+            [
+                "d5144d6f87edaecb"
+            ]
+        ]
+    },
+    {
+        "id": "f183a9ebc63e7af0",
+        "type": "http request",
+        "z": "552ed1ed09f56426",
+        "d": true,
+        "name": "Req",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 870,
+        "y": 480,
+        "wires": [
+            [
+                "c0d0a262060f79aa"
+            ]
+        ]
+    },
+    {
+        "id": "c0d0a262060f79aa",
+        "type": "debug",
+        "z": "552ed1ed09f56426",
+        "d": true,
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "fd3170aa0af8602f",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "d": true,
+        "name": "on request",
+        "func": "const api = global.get(\"api\")\n\nconst devices = msg.asset_value.devices\n\nfor (const device of devices) {\n    const tuya_device_id = device.device_id // device id ambil dari data scan api\n    const dps_id = device.dps_id // dps_id biasanya urutan saklar\n    const value = true //false adalah off\n\n    const new_msg = {\n        method: \"POST\",\n        url: `${api}/control?tuya_device_id=${tuya_device_id}&dps_id=${dps_id}&value=${value}`\n    }\n\n    node.send(new_msg)\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "f183a9ebc63e7af0"
+            ]
+        ]
+    },
+    {
+        "id": "a2a11e4d2abc96e2",
+        "type": "function",
+        "z": "552ed1ed09f56426",
+        "name": "Assets - Office",
+        "func": "const assets = {\n    \"MPS-BDG-LT.1-LOBBY\": {\n        \"cctv\": \"rtsp://admin:pahlawan10@192.168.10.247:554/Streaming/Channels/601\",\n        \"devices\": [{\n            \"name\": \"3_gang_saklar1\",\n            \"device_id\": \"eb2b134f9b2f4ba94bdkub\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"3_gang_saklar2\",\n            \"device_id\": \"eb2b134f9b2f4ba94bdkub\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"3_gang_saklar3\",\n            \"device_id\": \"eb2b134f9b2f4ba94bdkub\",\n            \"dps_id\": 3\n        }]\n    },\n    \"MPS-BDG-LT.1-MEETING1\": {\n        \"cctv\": \"rtsp://admin:pahlawan10@192.168.10.247:554/Streaming/Channels/701\",\n        \"devices\": [{\n            \"name\": \"3_gang_saklar1\",\n            \"device_id\": \"ebc2baff541c8eb67cnv8z\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"3_gang_saklar2\",\n            \"device_id\": \"ebc2baff541c8eb67cnv8z\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"3_gang_saklar3\",\n            \"device_id\": \"ebc2baff541c8eb67cnv8z\",\n            \"dps_id\": 3\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"ebbfbac0e47c6175c4iswz\",\n            \"dps_id\": 1\n        }]\n    },\n    \"MPS-BDG-LT.1-MEETING2\": {\n        \"cctv\": \"rtsp://admin:pahlawan10@192.168.10.247:554/Streaming/Channels/301\",\n        \"devices\": [{\n            \"name\": \"2_gang1_saklar1\",\n            \"device_id\": \"eb8ebbe622f0e68bc0hdwb\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"2_gang1_saklar2\",\n            \"device_id\": \"eb8ebbe622f0e68bc0hdwb\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"2_gang2_saklar1\",\n            \"device_id\": \"eb956f267a069ed8e0dmw6\",\n            \"dps_id\": 1\n        }, {\n            \"name\": \"2_gang2_saklar2\",\n            \"device_id\": \"eb956f267a069ed8e0dmw6\",\n            \"dps_id\": 2\n        }, {\n            \"name\": \"smart_plug\",\n            \"device_id\": \"ebf434bad212d79f5dqgcm\",\n            \"dps_id\": 1\n        }]\n    }\n}\nglobal.set('assets', assets)\nreturn msg;",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ab100f9ffbf129ac",
+        "type": "inject",
+        "z": "552ed1ed09f56426",
+        "name": "Interval",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eea3a1883e161f72",
+        "type": "debug",
+        "z": "552ed1ed09f56426",
+        "name": "debug 20",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e6f736306905dc37",
+        "type": "inject",
+        "z": "7371f30989a437f1",
+        "name": "Interval",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "112bd9158199ef65"
+            ]
+        ]
+    },
+    {
+        "id": "112bd9158199ef65",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "get class",
+        "func": "const assets = global.get(\"assets\");\n\nfor (const [key, value] of Object.entries(assets)) {\n\n    const new_msg = {\n        asset_id: key,\n        asset_value: value,\n        payload: value\n    }\n\n    node.send(new_msg);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "66fd16a10344c52c"
+            ]
+        ]
+    },
+    {
+        "id": "66fd16a10344c52c",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "get devices",
+        "func": "const p = msg.payload\nconst devices = p.devices\nconst real_devices = {}\n\nfor (const x of devices) {\n    if (real_devices[x.device_id] == undefined) {\n        real_devices[x.device_id] = []\n    }\n\n    real_devices[x.device_id].push(x)\n\n}\n\nfor (const [key, value] of Object.entries(real_devices)) {\n\n    const new_msg = {\n        asset_id: msg.asset_id,\n        asset_value: msg.asset_value,\n        tuya_device_id: key,\n        payload: value\n    }\n\n    node.send(new_msg);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 280,
+        "wires": [
+            [
+                "9815b045e62d3d5d"
+            ]
+        ]
+    },
+    {
+        "id": "7cb7e82b6d984693",
+        "type": "http request",
+        "z": "7371f30989a437f1",
+        "name": "Req",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "f5c7c29f0dbbd008"
+            ]
+        ]
+    },
+    {
+        "id": "9815b045e62d3d5d",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "Get status",
+        "func": "const api = global.get(\"api\")\nconst tuya_device_id = msg.tuya_device_id\n\nmsg.method = \"POST\"\nmsg.url = `${api}/status?tuya_device_id=${tuya_device_id}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 340,
+        "wires": [
+            [
+                "7cb7e82b6d984693"
+            ]
+        ]
+    },
+    {
+        "id": "f5c7c29f0dbbd008",
+        "type": "json",
+        "z": "7371f30989a437f1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 730,
+        "y": 340,
+        "wires": [
+            [
+                "e2da5ceca7547940"
+            ]
+        ]
+    },
+    {
+        "id": "e2da5ceca7547940",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "Save Status",
+        "func": "\nconst p = msg.payload\nconst path = `status_${msg.tuya_device_id}`\n\nflow.set(path, p.data)\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 400,
+        "wires": [
+            [
+                "7f1543d0c23a289d"
+            ]
+        ]
+    },
+    {
+        "id": "d0bd6650a41ee7f9",
+        "type": "inject",
+        "z": "7371f30989a437f1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 640,
+        "wires": [
+            [
+                "59e52ddb98e1b81f"
+            ]
+        ]
+    },
+    {
+        "id": "59e52ddb98e1b81f",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "cek memory",
+        "func": "const data = flow.keys()\n\nnode.warn(data)",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f76c2bb7ff0faf5",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "Send Broker",
+        "func": "const p = msg.payload\nconst company_id = global.get('company_id')\n\nmsg.topic = `/${company_id}/${msg.asset_id}`\nmsg.payload = p\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 520,
+        "wires": [
+            [
+                "c6f72049cc248ccd"
+            ]
+        ]
+    },
+    {
+        "id": "c6f72049cc248ccd",
+        "type": "mqtt out",
+        "z": "7371f30989a437f1",
+        "name": "",
+        "topic": "",
+        "qos": "0",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5547b35163de4760",
+        "x": 930,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "7f1543d0c23a289d",
+        "type": "debug",
+        "z": "7371f30989a437f1",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "d23dd3375f57be6e",
+        "type": "inject",
+        "z": "7371f30989a437f1",
+        "name": "Interval",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "30",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 520,
+        "wires": [
+            [
+                "1eb85668922a1e1f"
+            ]
+        ]
+    },
+    {
+        "id": "1eb85668922a1e1f",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "get class",
+        "func": "const assets = global.get(\"assets\");\n\nfor (const [key, value] of Object.entries(assets)) {\n\n    const new_msg = {\n        asset_id: key,\n        asset_value: value,\n        payload: value\n    }\n\n    node.send(new_msg);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 520,
+        "wires": [
+            [
+                "ef7ebadf9a23778e"
+            ]
+        ]
+    },
+    {
+        "id": "ef7ebadf9a23778e",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "get data",
+        "func": "const p = msg.payload\nconst devices = p.devices\n\nconst asset_data = {\n    iddevice: msg.asset_id,\n    field_timestamp: new Date(),\n    data: {}\n}\n\nfor (const x of devices) {\n\n    const get_state = flow.get(`status_${x.device_id}`)\n\n    if(get_state == undefined) {\n        node.warn(`${x.name} is not available in state`);\n        node.warn(x);\n        node.warn(get_state);\n    } else {\n        asset_data.data[x.name] = get_state.dps[x.dps_id]\n    }\n\n\n}\n\nmsg.payload = asset_data\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 520,
+        "wires": [
+            [
+                "9f76c2bb7ff0faf5"
+            ]
+        ]
+    },
+    {
+        "id": "a03d25e1729c74d8",
+        "type": "mqtt in",
+        "z": "7371f30989a437f1",
+        "name": "",
+        "topic": "/control/MPS/#",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "5547b35163de4760",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "a9a216e5f90d5584",
+                "cf4d50c803a03a49"
+            ]
+        ]
+    },
+    {
+        "id": "46a53a9d6dacd9bd",
+        "type": "debug",
+        "z": "7371f30989a437f1",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a9a216e5f90d5584",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "get data",
+        "func": "const assets = global.get(\"assets\");\n\nconst idtenant = msg.topic.split('/')[2]\nconst iddevice = msg.topic.split('/')[3]\nconst attribute = msg.payload.attribute\nconst value = msg.payload.data\n\nfor (const x of assets[iddevice].devices) {\n    if(x.name === attribute) {\n        msg.payload = {\n            tuya_device_id: x.device_id,\n            dps_id: x.dps_id,\n            value: value\n        }\n\n        return msg;        \n    }\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "e0557a5ef7514f46"
+            ]
+        ]
+    },
+    {
+        "id": "e0557a5ef7514f46",
+        "type": "function",
+        "z": "7371f30989a437f1",
+        "name": "control",
+        "func": "const api = flow.get(\"api\")\n\nconst tuya_device_id = msg.payload.tuya_device_id // device id ambil dari data scan api\nconst dps_id = msg.payload.dps_id // dps_id biasanya urutan saklar\nconst value = msg.payload.value //false adalah off\n\nmsg.method = \"POST\"\nmsg.url = `${api}/control?tuya_device_id=${tuya_device_id}&dps_id=${dps_id}&value=${value}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 140,
+        "wires": [
+            [
+                "faded2fce07edae6"
+            ]
+        ]
+    },
+    {
+        "id": "faded2fce07edae6",
+        "type": "http request",
+        "z": "7371f30989a437f1",
+        "name": "Req",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 730,
+        "y": 140,
+        "wires": [
+            [
+                "46a53a9d6dacd9bd"
+            ]
+        ]
+    },
+    {
+        "id": "e051073c2f58fc1e",
+        "type": "comment",
+        "z": "7371f30989a437f1",
+        "name": "Handling Control",
+        "info": "",
+        "x": 180,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "157652d26962d115",
+        "type": "comment",
+        "z": "7371f30989a437f1",
+        "name": "Get Status",
+        "info": "",
+        "x": 160,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "8df69a27b83b0937",
+        "type": "comment",
+        "z": "7371f30989a437f1",
+        "name": "Send Status",
+        "info": "",
+        "x": 170,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "afb8dc5b2f0d632f",
+        "type": "comment",
+        "z": "7371f30989a437f1",
+        "name": "debug",
+        "info": "",
+        "x": 150,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "cf4d50c803a03a49",
+        "type": "debug",
+        "z": "7371f30989a437f1",
+        "name": "debug 24",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "611d21436be7ab6f",
+        "type": "inject",
+        "z": "05ab146697317e78",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 00 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 240,
+        "wires": [
+            [
+                "496f3a4dd2f9e5aa"
+            ]
+        ]
+    },
+    {
+        "id": "496f3a4dd2f9e5aa",
+        "type": "exec",
+        "z": "05ab146697317e78",
+        "command": "rm /home/pooling/Developer/localtuya/images/*.jpg",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 510,
+        "y": 240,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "03b6892a035dea17",
+        "type": "inject",
+        "z": "05ab146697317e78",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 00 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 360,
+        "wires": [
+            [
+                "e275f4774df51408"
+            ]
+        ]
+    },
+    {
+        "id": "e275f4774df51408",
+        "type": "exec",
+        "z": "05ab146697317e78",
+        "command": "ls",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "8d95b3b3c4538832"
+            ],
+            [
+                "8d95b3b3c4538832"
+            ],
+            [
+                "8d95b3b3c4538832"
+            ]
+        ]
+    },
+    {
+        "id": "8d95b3b3c4538832",
+        "type": "debug",
+        "z": "05ab146697317e78",
+        "name": "debug 19",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 360,
+        "wires": []
+    }
+]

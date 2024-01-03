@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+tinytuya
+ultralytics
+numpy==1.23.5
+google-cloud-vision
+protobuf==3.20

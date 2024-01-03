@@ -1,0 +1,751 @@
+[
+    {
+        "id": "079f484f74a4e987",
+        "type": "tab",
+        "label": "OCR RADEA",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "532d659d9c9e01ae",
+        "type": "inject",
+        "z": "079f484f74a4e987",
+        "name": "inject",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 240,
+        "wires": [
+            [
+                "632d0c3eb8db1303"
+            ]
+        ]
+    },
+    {
+        "id": "632d0c3eb8db1303",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "capture rtsp",
+        "func": "const config = global.get('config')\n\nmsg.url = `${config.api}/capture-image?rtsp_url=${config.rtsp}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "3881c8c696e67e7f"
+            ]
+        ]
+    },
+    {
+        "id": "f5e7a1b357845d5f",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "ocr",
+        "func": "\nif (msg.payload.status == 'ok') {\n    msg.payload = msg.payload.data\n\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "33e15b7fa6b12c0f"
+            ]
+        ]
+    },
+    {
+        "id": "3d8543585e5fbc11",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "vision",
+        "func": "const config = global.get('config')\nconst gcs_uri = msg.filename\n\nmsg.url = `${config.api}/ocr/vision?gcs_uri=${gcs_uri}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 480,
+        "wires": [
+            [
+                "48d9f65a29eb8a5e"
+            ]
+        ]
+    },
+    {
+        "id": "3881c8c696e67e7f",
+        "type": "http request",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 630,
+        "y": 240,
+        "wires": [
+            [
+                "9fb96ffb73fe854a"
+            ]
+        ]
+    },
+    {
+        "id": "48d9f65a29eb8a5e",
+        "type": "http request",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 730,
+        "y": 480,
+        "wires": [
+            [
+                "8408a13b9aae5354"
+            ]
+        ]
+    },
+    {
+        "id": "33e15b7fa6b12c0f",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "paddle",
+        "func": "const config = global.get('config')\nconst filename = msg.payload\n\nmsg.url = `${config.api}/ocr/paddle?filename=${filename}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 400,
+        "wires": [
+            [
+                "1894bbd36be36a3b"
+            ]
+        ]
+    },
+    {
+        "id": "1894bbd36be36a3b",
+        "type": "http request",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 730,
+        "y": 400,
+        "wires": [
+            [
+                "6a3eeb302ad39103"
+            ]
+        ]
+    },
+    {
+        "id": "90c582eea2bf72d7",
+        "type": "link in",
+        "z": "079f484f74a4e987",
+        "name": "GCS OUT",
+        "links": [
+            "84e175dcb9bb48c6",
+            "cf1e07c2c5c63c6f",
+            "5e8c949fb443eb6e"
+        ],
+        "x": 175,
+        "y": 680,
+        "wires": [
+            [
+                "0189891c3f845e1a"
+            ]
+        ]
+    },
+    {
+        "id": "3568d8edb717652a",
+        "type": "postgresql",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "query": "SELECT * FROM ;",
+        "postgreSQLConfig": "b27939e715aa59c5",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1090,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a3eeb302ad39103",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "query",
+        "func": "\nmsg.query = `\n    INSERT INTO ocr(type, data, created_at)\n    VALUES('paddle', '${ msg.payload }', now())\n`\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 400,
+        "wires": [
+            [
+                "3568d8edb717652a",
+                "1bfd234d60c21a98"
+            ]
+        ]
+    },
+    {
+        "id": "9fb96ffb73fe854a",
+        "type": "json",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 830,
+        "y": 240,
+        "wires": [
+            [
+                "357e5e043c448735"
+            ]
+        ]
+    },
+    {
+        "id": "2ab561588aba3c10",
+        "type": "inject",
+        "z": "079f484f74a4e987",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"status\":\"ok\",\"data\":\"plat3.png_preprocess.jpg\"}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 400,
+        "wires": [
+            [
+                "f5e7a1b357845d5f"
+            ]
+        ]
+    },
+    {
+        "id": "0189891c3f845e1a",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "check files",
+        "func": "\nconst config = global.get('config')\n\nmsg.location = `${config.workdir}/images/${msg.payload.data}`\nmsg.new_filename = msg.payload.data\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 680,
+        "wires": [
+            [
+                "5a0892d6f56c4b75"
+            ]
+        ]
+    },
+    {
+        "id": "5a0892d6f56c4b75",
+        "type": "file in",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "filename": "location",
+        "filenameType": "msg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 480,
+        "y": 680,
+        "wires": [
+            [
+                "4ebf0701f7c14042"
+            ]
+        ]
+    },
+    {
+        "id": "4ebf0701f7c14042",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "save",
+        "func": "const DateTime = luxon.DateTime\n\nmsg.filename = `gs://envisions_desk_dev/ocr/RADEA/${DateTime.now().plus({ hours: 7 }).toISODate()}/${msg.new_filename}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "luxon",
+                "module": "luxon"
+            }
+        ],
+        "x": 650,
+        "y": 680,
+        "wires": [
+            [
+                "245de3113b14771b"
+            ]
+        ]
+    },
+    {
+        "id": "245de3113b14771b",
+        "type": "google-cloud-gcs-write",
+        "z": "079f484f74a4e987",
+        "account": "",
+        "keyFilename": "",
+        "filename": "",
+        "contentType": "",
+        "name": "",
+        "x": 820,
+        "y": 680,
+        "wires": [
+            [
+                "cdc2adbfbc03c9c1"
+            ]
+        ]
+    },
+    {
+        "id": "64cfd2d3c9acdc85",
+        "type": "inject",
+        "z": "079f484f74a4e987",
+        "name": "init",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "9337375508548b2f"
+            ]
+        ]
+    },
+    {
+        "id": "9337375508548b2f",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "config",
+        "func": "const config = {\n    api: \"http://localhost:8000\",\n    workdir: \"D:/developer/tuyalocal\",\n    rtsp: '0'\n}\n\nglobal.set(\"config\", config)\n\nnode.status({ fill: \"green\", shape: \"ring\", text: \"initiated\" });\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 60,
+        "wires": [
+            [
+                "0aeb132cf069f7ff"
+            ]
+        ]
+    },
+    {
+        "id": "357e5e043c448735",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "preprocess",
+        "func": "const config = global.get('config')\nconst filename = msg.payload.data\n\nmsg.url = `${config.api}/ocr/preprocess?filename=${filename}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "856cad81048c08d1"
+            ]
+        ]
+    },
+    {
+        "id": "856cad81048c08d1",
+        "type": "http request",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 630,
+        "y": 320,
+        "wires": [
+            [
+                "b01b5532c5bacc59"
+            ]
+        ]
+    },
+    {
+        "id": "b01b5532c5bacc59",
+        "type": "json",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 830,
+        "y": 320,
+        "wires": [
+            [
+                "f5e7a1b357845d5f",
+                "84e175dcb9bb48c6"
+            ]
+        ]
+    },
+    {
+        "id": "2646a4df9ac640b5",
+        "type": "http in",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "url": "/trigger",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 840,
+        "wires": [
+            [
+                "6d5021823ada4365"
+            ]
+        ]
+    },
+    {
+        "id": "f5faaa9a6621aa67",
+        "type": "http response",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 590,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "6d5021823ada4365",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "response",
+        "func": "\nmsg.payload = {\n    'status': 'ok'\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 860,
+        "wires": [
+            [
+                "f5faaa9a6621aa67",
+                "200f9ed72748ee8c"
+            ]
+        ]
+    },
+    {
+        "id": "44f3e159fabcf7f5",
+        "type": "link in",
+        "z": "079f484f74a4e987",
+        "name": "Trigger IN",
+        "links": [
+            "200f9ed72748ee8c"
+        ],
+        "x": 245,
+        "y": 200,
+        "wires": [
+            [
+                "632d0c3eb8db1303"
+            ]
+        ]
+    },
+    {
+        "id": "200f9ed72748ee8c",
+        "type": "link out",
+        "z": "079f484f74a4e987",
+        "name": "Trigger OUT",
+        "mode": "link",
+        "links": [
+            "44f3e159fabcf7f5"
+        ],
+        "x": 555,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "4383f6b888eafa36",
+        "type": "http in",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "url": "/trigger",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 880,
+        "wires": [
+            [
+                "6d5021823ada4365"
+            ]
+        ]
+    },
+    {
+        "id": "84e175dcb9bb48c6",
+        "type": "link out",
+        "z": "079f484f74a4e987",
+        "name": "GCS IN",
+        "mode": "link",
+        "links": [
+            "90c582eea2bf72d7"
+        ],
+        "x": 965,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "9fd6648cf7e2bd6d",
+        "type": "link in",
+        "z": "079f484f74a4e987",
+        "name": "VISION IN",
+        "links": [
+            "cdc2adbfbc03c9c1"
+        ],
+        "x": 355,
+        "y": 480,
+        "wires": [
+            [
+                "3d8543585e5fbc11"
+            ]
+        ]
+    },
+    {
+        "id": "cdc2adbfbc03c9c1",
+        "type": "link out",
+        "z": "079f484f74a4e987",
+        "name": "GCS OUT",
+        "mode": "link",
+        "links": [
+            "9fd6648cf7e2bd6d"
+        ],
+        "x": 945,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "7d213d51056d2d55",
+        "type": "postgresql",
+        "z": "079f484f74a4e987",
+        "name": "",
+        "query": "SELECT * FROM ;",
+        "postgreSQLConfig": "b27939e715aa59c5",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 590,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0aeb132cf069f7ff",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "create table",
+        "func": "msg.query = `\n    CREATE TABLE IF NOT EXISTS ocr (\n        id SERIAL PRIMARY KEY,\n        type text,\n        data jsonb,\n        created_at timestamp\n    );\n`\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "7d213d51056d2d55"
+            ]
+        ]
+    },
+    {
+        "id": "8408a13b9aae5354",
+        "type": "function",
+        "z": "079f484f74a4e987",
+        "name": "query",
+        "func": "\nmsg.query = `\n    INSERT INTO ocr(type, data, created_at)\n    VALUES('vision', '${msg.payload}', now())\n`\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 480,
+        "wires": [
+            [
+                "3568d8edb717652a",
+                "0dfce3ea906e1a65"
+            ]
+        ]
+    },
+    {
+        "id": "79060705d9a19ee6",
+        "type": "inject",
+        "z": "079f484f74a4e987",
+        "name": "test",
+        "props": [
+            {
+                "p": "filename",
+                "v": "gs://envisions_desk_dev/ocr/RADEA/2023-11-01/plat3.png_preprocess.jpg",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 210,
+        "y": 480,
+        "wires": [
+            [
+                "3d8543585e5fbc11"
+            ]
+        ]
+    },
+    {
+        "id": "1bfd234d60c21a98",
+        "type": "debug",
+        "z": "079f484f74a4e987",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "0dfce3ea906e1a65",
+        "type": "debug",
+        "z": "079f484f74a4e987",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "b27939e715aa59c5",
+        "type": "postgreSQLConfig",
+        "name": "",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "ocr",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "postgres",
+        "userFieldType": "str",
+        "password": "123456",
+        "passwordFieldType": "str"
+    }
+]

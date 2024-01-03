@@ -1,0 +1,3 @@
+import tinytuya
+
+tinytuya.wizard()
